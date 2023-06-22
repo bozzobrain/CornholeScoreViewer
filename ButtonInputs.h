@@ -17,8 +17,8 @@ T2_M_DEPRESSED = false;
 Timers T1_ResetButtonTimer(1000);
 Timers T2_ResetButtonTimer(1000);
 
-Timers T1_ButtonHoldTimer(100);
-Timers T2_ButtonHoldTimer(100);
+Timers T1_ButtonHoldTimer(250);
+Timers T2_ButtonHoldTimer(250);
 
 bool T1_ColorSelectMode = false, T2_ColorSelectMode = false;
 uint8_t t1_score_holder = 0, t2_score_holder = 0;
@@ -112,7 +112,8 @@ void updateButtons()
     }
     else
     {
-      t1_score--;
+      if(t1_score>0)
+        t1_score--;
       changedScore = true;
     }
     T1_M_DEPRESSED = true;
@@ -122,7 +123,8 @@ void updateButtons()
   {    
     if(!T1_ColorSelectMode)
     {
-      t1_score--;
+      if(t1_score>0)
+        t1_score--;
       changedScore = true;
     }
   }
@@ -145,6 +147,7 @@ void updateButtons()
       changedScore = true;
     }
     T2_P_DEPRESSED = true;
+    T2_ButtonHoldTimer.resetTimer();
   }
   else if(!digitalRead(TEAM2_PLUS_PIN) && T2_P_DEPRESSED && T2_ButtonHoldTimer.timerDone())
   {    
@@ -203,16 +206,19 @@ void updateButtons()
     }
     else
     {
-      t2_score--;
+      if(t2_score>0)
+        t2_score--;
       changedScore = true;
     }
     T2_M_DEPRESSED = true;
+    T2_ButtonHoldTimer.resetTimer();
   }
   else if(!digitalRead(TEAM2_MINUS_PIN) && T2_M_DEPRESSED && T2_ButtonHoldTimer.timerDone())
   {    
     if(!T2_ColorSelectMode)
     {
-      t2_score--;
+      if(t2_score>0)
+        t2_score--;
       changedScore = true;
     }
   }
