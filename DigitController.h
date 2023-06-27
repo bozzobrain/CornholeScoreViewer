@@ -44,9 +44,9 @@ bool t1_flash_on = false, t2_flash_on = false;
 #define COLOR_OFF 0,0,0
 
 #define PIN_T1_1 2
-#define PIN_T1_2 3
+#define PIN_T1_2 5
 #define PIN_T2_1 4
-#define PIN_T2_2 5
+#define PIN_T2_2 3
 #define NUMPIXELS 28
 
 
